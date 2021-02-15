@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# curl -X PUT -H "Authorization: $(echo bruker:passord | base64)" http://localhost:5000/passord -d "$1"
+curl -X PUT -H "Authorization: $(echo bruker:passord | base64)" https://martinssystem.herokuapp.com/passord -d "$1"
