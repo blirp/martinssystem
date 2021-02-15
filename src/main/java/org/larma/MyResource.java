@@ -1,5 +1,7 @@
 package org.larma;
 
+import java.util.Random;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,6 +20,7 @@ public class MyResource {
         "Dette er tre"
     };
     private static final int[] sekvens = { 0, 1, 3 };
+    private static final Random random = new Random(System.currentTimeMillis());
 
     @GET
     @Produces("image/png")
@@ -60,13 +63,17 @@ public class MyResource {
         sb.append("<p>");
         int i = forrige(side);
         if (i >= 0) {
-            sb.append("<a href=\"").append(i).append("\">Forrige side</a>");
+            sb.append("<a href=\"").append(i).append("\">Forrige side</a><br>");
         }
         i = neste(side);
         if (i >= 0) {
-            sb.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-            sb.append("<a href=\"").append(neste(side)).append("\">Neste side</a>");
+            sb.append("<a href=\"").append(neste(side)).append("\">Neste side</a><br>");
         }
+        //if (random.nextInt(2) == 1) {
+            i = random.nextInt(tekst.length);
+            sb.append("<a href=\"").append(i).append("\">Tilfeldig side</a><br>");
+        //}
+
         sb.append("</body></html>");
         return sb.toString();
     }
